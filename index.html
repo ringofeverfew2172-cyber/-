@@ -10,8 +10,11 @@
       --card:#121a2a;
       --muted:#aab7d1;
       --text:#eef3ff;
-      --accent:#7aa6ff;
-      --accent2:#65e6c7;
+
+      /* ===== 紅梅色（こうばいいろ） ===== */
+      --accent:#f2a0a1;
+      --accent2:#f2a0a1;
+
       --warn:#ffcc66;
       --danger:#ff6b6b;
       --ok:#69db7c;
@@ -23,8 +26,8 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
-      background: radial-gradient(1000px 700px at 20% 10%, rgba(122,166,255,.22), transparent 60%),
-                  radial-gradient(900px 650px at 85% 20%, rgba(101,230,199,.18), transparent 55%),
+      background: radial-gradient(1000px 700px at 20% 10%, rgba(242,160,161,.22), transparent 60%),
+                  radial-gradient(900px 650px at 85% 20%, rgba(242,160,161,.16), transparent 55%),
                   radial-gradient(900px 650px at 30% 90%, rgba(255,204,102,.10), transparent 60%),
                   var(--bg);
       color:var(--text);
@@ -41,7 +44,7 @@
     }
     .logo{
       width:44px;height:44px;border-radius:14px;
-      background: linear-gradient(135deg, rgba(122,166,255,.95), rgba(101,230,199,.95));
+      background: linear-gradient(135deg, rgba(242,160,161,.98), rgba(242,160,161,.75));
       box-shadow: 0 12px 25px rgba(0,0,0,.25);
       position:relative;
       overflow:hidden;
@@ -60,6 +63,7 @@
       font-size:12px;color:var(--muted);
       box-shadow: 0 10px 20px rgba(0,0,0,.18);
       user-select:none;
+      min-width: 260px;
     }
     .grid{
       display:grid;
@@ -70,6 +74,7 @@
     @media (max-width: 920px){
       .grid{grid-template-columns:1fr}
       header{flex-direction:column;align-items:flex-start}
+      .pill{min-width: 0; width: 100%;}
     }
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
@@ -89,6 +94,7 @@
       border:1px solid var(--border);
       padding:6px 10px;border-radius:999px;
       background:rgba(0,0,0,.18);
+      white-space: nowrap;
     }
     .progress{
       height:8px;border-radius:99px;background:rgba(255,255,255,.07);
@@ -130,8 +136,8 @@
       transform: scale(0);
       transition: transform .16s ease;
     }
-    .choice[data-selected="true"]{border-color: rgba(122,166,255,.55); background: rgba(122,166,255,.10)}
-    .choice[data-selected="true"] .radio{border-color: rgba(122,166,255,.75)}
+    .choice[data-selected="true"]{border-color: rgba(242,160,161,.60); background: rgba(242,160,161,.10)}
+    .choice[data-selected="true"] .radio{border-color: rgba(242,160,161,.85)}
     .choice[data-selected="true"] .radio:after{transform: scale(1)}
     .ctas{
       display:flex; gap:10px; flex-wrap:wrap;
@@ -148,17 +154,15 @@
     }
     button:hover{transform: translateY(-1px); background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.18)}
     button.primary{
-      background: linear-gradient(135deg, rgba(122,166,255,.95), rgba(101,230,199,.92));
-      color:#081018; border:0;
+      background: linear-gradient(135deg, rgba(242,160,161,.96), rgba(242,160,161,.78));
+      color:#101018; border:0;
     }
     button.primary:hover{filter: brightness(1.03)}
     button.danger{background: rgba(255,107,107,.10); border-color: rgba(255,107,107,.28)}
     button:disabled{opacity:.5; cursor:not-allowed; transform:none}
     .small{font-size:12px;color:var(--muted)}
     .divider{height:1px;background:var(--border);margin:14px 0}
-    .result{
-      display:none;
-    }
+    .result{display:none;}
     .result.show{display:block}
     .scorebar{
       height:10px;border-radius:99px;background:rgba(255,255,255,.07);
@@ -224,6 +228,56 @@
       background: rgba(255,255,255,.03);
       color:var(--muted);font-size:12px
     }
+
+    /* ===== 横展開カード（ブランド紹介） ===== */
+    .brandRowTitle{margin: 12px 0 10px; font-size:14px}
+    .brandRow{
+      display:flex; gap:12px;
+      overflow-x:auto;
+      padding: 2px 0 8px;
+      scroll-snap-type:x mandatory;
+    }
+    .brandCard{
+      min-width: 340px;
+      scroll-snap-align:start;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:16px;
+      background: rgba(0,0,0,.14);
+      padding:12px;
+    }
+    .brandTop{
+      display:flex; gap:12px; align-items:flex-start; justify-content:space-between;
+    }
+    .brandName{font-weight:800; font-size:14px; margin:0}
+    .brandSub{font-size:12px; color:var(--muted); margin:2px 0 0}
+    .brandGrid{
+      display:grid;
+      grid-template-columns: 180px 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    canvas.radar{width:180px;height:180px; border-radius:12px}
+    .brandQuote{
+      border:1px dashed rgba(255,255,255,.18);
+      border-radius:14px;
+      padding:10px;
+      font-size:12px;
+      color:var(--muted);
+      background: rgba(255,255,255,.03);
+    }
+    .brandBtn{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      text-decoration:none;
+      color:inherit;
+      background: rgba(0,0,0,.12);
+    }
+    .brandBtn:hover{background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18)}
+    .brandBtn .t{font-weight:800;font-size:13px}
+    .brandBtn .s{font-size:11px;color:var(--muted)}
   </style>
 </head>
 <body>
@@ -255,9 +309,7 @@
         </div>
 
         <div class="bd">
-          <div id="quiz">
-            <!-- Question content injected here -->
-          </div>
+          <div id="quiz"></div>
 
           <div class="ctas">
             <button id="backBtn">戻る</button>
@@ -322,6 +374,11 @@
                 <span class="arrow">↗</span>
               </a>
             </div>
+
+            <!-- ===== 横展開（ブランド紹介） ===== -->
+            <div class="divider"></div>
+            <h3 class="brandRowTitle">地域ブランド（横スクロール）</h3>
+            <div id="brandRow" class="brandRow"></div>
 
             <div class="footer">
               <div>※リンクは参考。後で「QR→商品別ページ」へ差し替えられる想定。</div>
@@ -506,9 +563,8 @@
         const v = p.match(state.score);
         if(v>bestVal){bestVal=v; best=p;}
       }
-      // compute "match percent" just for UI
       const total = state.score.rich+state.score.mild+state.score.umami+state.score.sweet;
-      const maxPossible = 4*4; // rough (since choices vary); keep simple
+      const maxPossible = 4*4;
       const pct = Math.min(98, Math.max(45, Math.round((total/(maxPossible))*100 + (bestVal%7))));
       return {profile:best, pct};
     }
@@ -550,18 +606,15 @@
           node.addEventListener("click", ()=>{
             const k = node.getAttribute("data-key");
             state.answers[q.id]=k;
-            // auto-advance
             if(state.step < total-1) state.step += 1;
-            else state.step = total; // finish
+            else state.step = total;
             render();
           });
         });
 
-        // result panel hidden until finished
         resultBox.classList.remove("show");
         emptyBox.style.display="block";
       } else {
-        // show result
         const {profile, pct} = bestProfile();
         emptyBox.style.display="none";
         resultBox.classList.add("show");
@@ -577,7 +630,6 @@
           </div>
         `).join("");
 
-        // simple "top traits"
         const s = state.score;
         const traits = [
           {k:"旨味", v:s.umami},
@@ -604,7 +656,6 @@
           </div>
         `;
 
-        // keep quiz summary
         quizEl.innerHTML = `
           <h2 class="qtitle">診断完了</h2>
           <p class="qdesc">回答内容を確認・修正できます（右の結果も即更新）。</p>
@@ -662,7 +713,6 @@
         await navigator.clipboard.writeText(text);
         showToast("コピーしました");
       }catch(e){
-        // fallback
         const ta = document.createElement("textarea");
         ta.value = text;
         document.body.appendChild(ta);
@@ -674,11 +724,154 @@
     });
 
     shareHintBtn.addEventListener("click", ()=>{
-      showToast("共有するなら：HTMLをzipで送る or 公開URLを作って共有");
+      showToast("共有するなら：GitHub Pages のURLを送るだけでOK");
     });
+
+    // ===== 横展開（ブランドカード）データ（2件）=====
+    // 5軸：旨味 / 甘味 / 塩味 / 酸味 / 苦味（0〜5）
+    const BRANDS = [
+      {
+        brandName: "オガワーマン",
+        breweryName: "小川隼空",
+        quote: "甘党な私だからこそたどり着けた甘さがここにあります。どうぞお楽しみください。",
+        scores: { umami: 4.2, sweet: 4.6, salty: 2.2, sour: 1.4, bitter: 1.0 },
+        stampText: "小川",
+        url: "https://www.fsjk.or.jp/product/"
+      },
+      {
+        brandName: "モロミちゃん",
+        breweryName: "福醤モロミ",
+        quote: "旨みで、毎日のごはんがちょっと楽しくなる味。",
+        scores: { umami: 4.6, sweet: 2.6, salty: 2.4, sour: 1.2, bitter: 0.8 },
+        stampText: "福醤",
+        url: "https://www.fsjk.or.jp/product/"
+      },
+    ];
+
+    function stampSVG(text){
+      const safe = (text || "").slice(0,2);
+      return `
+        <svg width="58" height="58" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" aria-label="stamp">
+          <path d="M29 2 L50 11 L56 29 L50 47 L29 56 L8 47 L2 29 L8 11 Z"
+            fill="rgba(0,0,0,.10)" stroke="rgba(255,255,255,.35)" stroke-width="2"/>
+          <circle cx="29" cy="29" r="18" fill="rgba(255,255,255,.03)" stroke="rgba(242,160,161,.95)" stroke-width="2"/>
+          <text x="29" y="34" text-anchor="middle" font-size="18" font-weight="800"
+            fill="rgba(242,160,161,.98)" font-family="ui-sans-serif, system-ui">${safe}</text>
+        </svg>`;
+    }
+
+    function drawRadar(canvas, scores){
+      const ctx = canvas.getContext("2d");
+      const size = 180;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = size * dpr;
+      canvas.height = size * dpr;
+      canvas.style.width = size + "px";
+      canvas.style.height = size + "px";
+      ctx.scale(dpr, dpr);
+
+      const cx = size/2, cy = size/2;
+      const R = 70;
+      const axes = [
+        {key:"umami",  label:"旨味"},
+        {key:"salty",  label:"塩味"},
+        {key:"sweet",  label:"甘味"},
+        {key:"sour",   label:"酸味"},
+        {key:"bitter", label:"苦味"},
+      ];
+
+      ctx.clearRect(0,0,size,size);
+
+      ctx.strokeStyle = "rgba(255,255,255,.18)";
+      ctx.lineWidth = 1;
+      for(let lv=1; lv<=5; lv++){
+        const r = (R*lv)/5;
+        ctx.beginPath();
+        axes.forEach((a,i)=>{
+          const ang = (-Math.PI/2) + (i*(2*Math.PI/axes.length));
+          const x = cx + r*Math.cos(ang);
+          const y = cy + r*Math.sin(ang);
+          if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+        });
+        ctx.closePath();
+        ctx.stroke();
+      }
+
+      axes.forEach((a,i)=>{
+        const ang = (-Math.PI/2) + (i*(2*Math.PI/axes.length));
+        const x = cx + R*Math.cos(ang);
+        const y = cy + R*Math.sin(ang);
+        ctx.beginPath();
+        ctx.moveTo(cx,cy);
+        ctx.lineTo(x,y);
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(255,255,255,.78)";
+        ctx.font = "11px ui-sans-serif, system-ui";
+        const lx = cx + (R+18)*Math.cos(ang);
+        const ly = cy + (R+18)*Math.sin(ang);
+        ctx.textAlign = (Math.abs(Math.cos(ang))<0.2) ? "center" : (Math.cos(ang)>0 ? "left":"right");
+        ctx.textBaseline = (Math.abs(Math.sin(ang))<0.2) ? "middle" : (Math.sin(ang)>0 ? "top":"bottom");
+        ctx.fillText(a.label, lx, ly);
+      });
+
+      const max = 5;
+      ctx.fillStyle = "rgba(242,160,161,.22)";
+      ctx.strokeStyle = "rgba(242,160,161,.95)";
+      ctx.lineWidth = 2;
+
+      ctx.beginPath();
+      axes.forEach((a,i)=>{
+        const v = Math.max(0, Math.min(max, scores[a.key] ?? 0));
+        const r = (R * v)/max;
+        const ang = (-Math.PI/2) + (i*(2*Math.PI/axes.length));
+        const x = cx + r*Math.cos(ang);
+        const y = cy + r*Math.sin(ang);
+        if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      });
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    }
+
+    function renderBrandRow(){
+      const row = document.getElementById("brandRow");
+      if(!row) return;
+
+      row.innerHTML = BRANDS.map((b, idx)=>`
+        <div class="brandCard">
+          <div class="brandTop">
+            <div>
+              <p class="brandName">[醤油蔵] ${b.brandName}</p>
+              <p class="brandSub">[蔵元] ${b.breweryName}</p>
+            </div>
+            <div title="荷印">${stampSVG(b.stampText)}</div>
+          </div>
+
+          <div class="brandGrid">
+            <canvas class="radar" id="radar_${idx}"></canvas>
+            <div class="brandQuote">${b.quote}</div>
+          </div>
+
+          <a class="brandBtn" href="${b.url}" target="_blank" rel="noopener">
+            <div>
+              <div class="t">詳細を見る</div>
+              <div class="s">外部リンク（仮）</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+        </div>
+      `).join("");
+
+      BRANDS.forEach((b, idx)=>{
+        const c = document.getElementById(`radar_${idx}`);
+        if(c) drawRadar(c, b.scores);
+      });
+    }
 
     // init
     render();
+    renderBrandRow();
   </script>
 </body>
 </html>
